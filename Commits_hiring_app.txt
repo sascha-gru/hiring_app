@@ -1,0 +1,71 @@
+
+Mo. 28.04.2025
+
+Aufgaben durchgelesen und schon mal im Kopf geschwenkt
+
+
+Di. 29.04.2025
+
+Installation Laravel
+Anlegen aller Dateien im Projekt:
+Problem: Laravel sail-Befehl: sail artisan make:model Job --all  benötigt Docker-Container
+Lösung: php statt sail verwenden
+
+Localhost: composer run dev
+
+Alle Dateien anlegen (Models, Controller, Policies & Co)
+
+Einzelne Views angelegt
+
+
+
+Mi. 30.04.2025
+
+Routen geändert:
+
+- von:
+Route::get('/job', function () {
+     return view('jobs.index');
+
+Kein Zugriff auf Daten aus dem Modell Job.
+Ruft nur direkt eine View auf.
+
+- zu:
+Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+
+Warum: Zugriff auf den Controller, um Daten aus der Datenbank anzuzeigen (dynamisch, nicht statisch). Besser erweiterbar.
+
+die richtigen Controller hinzugefügt
+
+Um die Migrationstabellen nach Bearbeitung zu aktualisieren: 
+php artisan migrate:fresh
+
+Um die Seeders auszuführen und die Tabellen mit Datensätzen zu befüllen: 
+php artisan db:seed
+
+
+
+Do. 01.05.2025
+
+Kleine CSS-Befehle hinzugefügt
+
+Bei Listenansicht einen Button hinzugefügt. Wenn man auf den klickt, wird man zum Formular fürs neue Erstellen gesandt
+
+Bei Detailansicht ein Formular zum Bearbeiten hinzugefügt. 
+In der Detailansicht kann man nun im Formular den Job und (für alle anderen Models gleiche Struktur) bearbeiten
+
+
+
+Fr. 02.05.2025
+
+Learnings:
+Falschen Controller angesprochen, daher Fehlermeldung: 404, Seite nicht auffindbar
+
+In Laravel sind Modelle standardmäßig gegen Mass Assignment geschützt:
+Lösung: protected $fillable = ['category_name', 'description'];
+mit protected plus Variablen $fillable bestimme ich, welche Spalten geändert werden dürfen
+
+Reihenfolge der Routen ist relevant, damit alle angezeigt werden. Neue Seiten-Routen müssen vor den Seiten-Routen mit ID-Weiterleitung stehen
+
+Login-Seite und Home-Seite erstellt
+Verlinkung zu allen Seiten und zurück
